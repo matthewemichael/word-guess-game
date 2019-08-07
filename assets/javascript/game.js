@@ -23,13 +23,13 @@ var possibleWords = [
 
 ];
 
-var maxTries = 10
-var guessedLetters = []
-var guessingWord = []
-var usedGuessingwWords = []
-var wordToMatch
-var numGuess
-var wins = 0
+var maxTries = 10;
+var guessedLetters = [];
+var guessingWord = [];
+var usedGuessingwWords = [];
+var wordToMatch;
+var numGuess;
+var wins = 0;
 
 //Starts game
 resetGame()
@@ -59,8 +59,9 @@ function checkForLetter(letter) {
       foundLetter = true
       // If guessing word matches random word
       if (guessingWord.join("") === wordToMatch) {
-        // Increment # of wins
+        // Increment # of wins and add word to usedGuessingWords
         wins++
+        endRound()
         updateDisplay()
         resetGame()
       }
@@ -76,11 +77,16 @@ function checkForLetter(letter) {
     }
     if (numGuess === 0) {
       // Display word before reseting game
+      endRound()
       guessingWord = wordToMatch.split()
       resetGame()
     }
   }
   updateDisplay()
+}
+
+function endRound() {
+  usedGuessingwWords.push(wordToMatch);
 }
 
 //Reset the game
@@ -90,6 +96,12 @@ function resetGame() {
   // Get a new word
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
   console.log(wordToMatch)
+  console.log(usedGuessingwWords)
+  // If new word has already been used randomly select another - !freaks out after all options have been played!
+  if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
+    resetGame()
+    console.log(wordToMatch)
+  }
 
   // Reset word arrays
   guessedLetters = []
