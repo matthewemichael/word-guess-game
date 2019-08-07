@@ -9,12 +9,24 @@ var possibleWords = [
   "ACADIA", 
   "MAMMOTH CAVE", 
   "OLYMPIC", 
-  "GREAT SMOKY MOUNTAINS"
+  "GREAT SMOKY MOUNTAINS",
+  "ARCHES",
+  "BRYCE CANYON",
+  "CARLSBAD CAVERNS",
+  "CRATER LAKE",
+  "DEATH VALLEY",
+  "DENALI",
+  "JOSHUA TREE",
+  "CAPITOL REEF",
+  "CANYON LANDS",
+  "BADLANDS",
+
 ];
 
 var maxTries = 10
 var guessedLetters = []
 var guessingWord = []
+var usedGuessingwWords = []
 var wordToMatch
 var numGuess
 var wins = 0
@@ -38,13 +50,13 @@ var isLetter = function(ch){
 
 // Check if letter is in word
 function checkForLetter(letter) {
-  
+  var foundLetter = false
 
   // Search string for letter
   for (var i=0; i < wordToMatch.length; i++) {
     if (letter === wordToMatch[i]) {
       guessingWord[i] = letter
-      
+      foundLetter = true
       // If guessing word matches random word
       if (guessingWord.join("") === wordToMatch) {
         // Increment # of wins
@@ -53,9 +65,10 @@ function checkForLetter(letter) {
         resetGame()
       }
     }
-    
+  }
+  if (foundLetter === false) {
     // Check if inccorrect guess is already on the list
-    else if (guessedLetters.indexOf(letter) != -1) {
+    if (guessedLetters.includes(letter) === false) {
       // Add incorrect letter to guessed letter list
       guessedLetters.push(letter)
       // Decrement the number of remaining guesses
