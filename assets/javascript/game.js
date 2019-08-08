@@ -20,10 +20,20 @@ var possibleWords = [
   "CAPITOL REEF",
   "CANYON LANDS",
   "BADLANDS",
-
+  "BIG BEND",
+  "SEQUOIA",
+  "BISCAYNE",
+  "SHENANDOAH",
+  "HOT SPRINGS",
+  "MOUNT RANIER",
+  "SAGUARO",
+  "KINGS CANYON",
+  "EVERGLADES",
+  "MESA VERDE",
+  "REDWOOD"
 ];
 
-var maxTries = 5;
+var maxTries = 7;
 var guessedLetters = [];
 var guessingWord = [];
 var usedGuessingwWords = [];
@@ -79,7 +89,7 @@ function checkForLetter(letter) {
       // Display word before reseting game
       endRound()
       guessingWord = wordToMatch.split()
-      setTimeout(resetGame, 300);
+      setTimeout(resetGame, 1000);
     }
   }
   updateDisplay()
@@ -97,7 +107,7 @@ function resetGame() {
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
   console.log(wordToMatch)
   console.log(usedGuessingwWords)
-  // If new word has already been used randomly select another - !! -- freaks out after all options have been played!!
+  // If new word has already been used randomly select another - !!freaks out after all options have been played!!
   if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
     resetGame()
     console.log(wordToMatch)
@@ -114,7 +124,7 @@ function resetGame() {
       guessingWord.push(" ")
     } 
     else {
-      guessingWord.push(" _ ")
+      guessingWord.push("_")
     }
   }
   updateDisplay()
