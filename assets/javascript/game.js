@@ -23,7 +23,7 @@ var possibleWords = [
 
 ];
 
-var maxTries = 10;
+var maxTries = 5;
 var guessedLetters = [];
 var guessingWord = [];
 var usedGuessingwWords = [];
@@ -63,7 +63,7 @@ function checkForLetter(letter) {
         wins++
         endRound()
         updateDisplay()
-        resetGame()
+        setTimeout(resetGame, 300);
       }
     }
   }
@@ -79,7 +79,7 @@ function checkForLetter(letter) {
       // Display word before reseting game
       endRound()
       guessingWord = wordToMatch.split()
-      resetGame()
+      setTimeout(resetGame, 300);
     }
   }
   updateDisplay()
@@ -97,7 +97,7 @@ function resetGame() {
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
   console.log(wordToMatch)
   console.log(usedGuessingwWords)
-  // If new word has already been used randomly select another - !freaks out after all options have been played!
+  // If new word has already been used randomly select another - !! -- freaks out after all options have been played!!
   if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
     resetGame()
     console.log(wordToMatch)
