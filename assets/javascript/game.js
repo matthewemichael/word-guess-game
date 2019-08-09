@@ -40,6 +40,7 @@ var usedGuessingwWords = [];
 var wordToMatch;
 var numGuess;
 var wins = 0;
+var pause = false;
 var loseSound = new Audio("./assets/sounds/ahahah.mp3");
 var winSound = new Audio("./assets/sounds/clever.wav");
 
@@ -49,17 +50,19 @@ resetGame()
 // Wait for key press
 document.onkeydown = function(event) {
   // Make sure key pressed is an alpha character
-  if (isLetter(event.key)) {
+  if (isLetter(event.key) && pause === false) {
   checkForLetter(event.key.toUpperCase());
   }
   document.getElementById('welcome').className = 'noBlink';
 }
 
 // Check if key pressed is between A-Z or a-z
+
 var isLetter = function(ch){
   return typeof ch === "string" && ch.length === 1
   && (ch >= "a" && ch <= "z" || ch >= "A" && ch <= "Z");
 }
+
 
 // Check if letter is in word
 function checkForLetter(letter) {
@@ -75,9 +78,10 @@ function checkForLetter(letter) {
         // Increment # of wins and add word to usedGuessingWords
         wins++
         usedGuessingwWords.push(wordToMatch);
+        pause = true;
         winSound.play();
         updateDisplay();
-        setTimeout(resetGame, 1000);
+        setTimeout(resetGame, 4000);
       }
     }
   }
@@ -93,8 +97,9 @@ function checkForLetter(letter) {
       // Display word before reseting game
       usedGuessingwWords.push(wordToMatch);
       guessingWord = wordToMatch.split();
+      pause = true;
       loseSound.play();
-      setTimeout(resetGame, 1000);
+      setTimeout(resetGame, 4000);
     }
   }
   updateDisplay();
@@ -103,6 +108,7 @@ function checkForLetter(letter) {
 //Reset the game
 function resetGame() {
   numGuess = maxTries;
+  pause = false;
   document.getElementById('welcome').className = 'blink';
   // Get a new word
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase();
