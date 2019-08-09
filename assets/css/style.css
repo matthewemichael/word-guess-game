@@ -2,7 +2,7 @@ body {
     background-image: url("../images/nationalparks-vintage-cropped.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0, auto;
+    background-position: center 0;
 }
 
 .container {
@@ -10,7 +10,7 @@ body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 30px;
     color: #f9e4b2;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.5px;
     text-shadow:
     -1px -1px 0 #120d01,
     1px -1px 0 #120d01,
@@ -36,9 +36,12 @@ h2 {
 h5 { 
     font-size: 25px !important;
     font-weight: bold !important;
-    animation: blink linear !important;
-    animation-duration: 2s !important;
-    animation-iteration-count: 3 !important;
+    animation: blink linear 2s infinite !important;
+
+}
+
+.noBlink {
+    visibility: hidden;
 }
 
 /* FIND WAY TO STOP BLINKING ON KEY PRESS */
@@ -49,5 +52,5 @@ h5 {
 }
 
 #currentWord {
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }

@@ -50,6 +50,7 @@ document.onkeydown = function(event) {
   if (isLetter(event.key)) {
   checkForLetter(event.key.toUpperCase())
   }
+  document.getElementById('welcome').className = 'noBlink';
 }
 
 // Check if key pressed is between A-Z or a-z
@@ -96,13 +97,13 @@ function checkForLetter(letter) {
 }
 
 function endRound() {
-  usedGuessingwWords.push(wordToMatch);
+  usedGuessingwWords.push(wordToMatch)
 }
 
 //Reset the game
 function resetGame() {
   numGuess = maxTries
-
+  document.getElementById('welcome').className = 'blink';
   // Get a new word
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
   console.log(wordToMatch)
