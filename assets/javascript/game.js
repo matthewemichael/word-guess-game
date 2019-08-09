@@ -40,7 +40,7 @@ var usedGuessingwWords = [];
 var wordToMatch;
 var numGuess;
 var wins = 0;
-var pause = false;
+var pause = false; // This var and setTimout funtion to not listen for keypress while game resets
 var loseSound = new Audio("./assets/sounds/ahahah.mp3");
 var winSound = new Audio("./assets/sounds/clever.wav");
 
@@ -53,6 +53,7 @@ document.onkeydown = function(event) {
   if (isLetter(event.key) && pause === false) {
   checkForLetter(event.key.toUpperCase());
   }
+  // Turn of blinking "...get started" message on keypress
   document.getElementById('welcome').className = 'noBlink';
 }
 
@@ -77,6 +78,7 @@ function checkForLetter(letter) {
       if (guessingWord.join("") === wordToMatch) {
         // Increment # of wins and add word to usedGuessingWords
         wins++
+        // Add word to usedGuessingWords array to not be repeated
         usedGuessingwWords.push(wordToMatch);
         pause = true;
         winSound.play();
@@ -94,8 +96,9 @@ function checkForLetter(letter) {
       numGuess--
     }
     if (numGuess === 0) {
-      // Display word before reseting game
+      // Add word to usedGuessingWords array to not be repeated
       usedGuessingwWords.push(wordToMatch);
+      // Display word before reseting game
       guessingWord = wordToMatch.split();
       pause = true;
       loseSound.play();
@@ -109,15 +112,30 @@ function checkForLetter(letter) {
 function resetGame() {
   numGuess = maxTries;
   pause = false;
+  // Restores blinking "...get started" message
   document.getElementById('welcome').className = 'blink';
   // Get a new word
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase();
   console.log(wordToMatch)
   console.log(usedGuessingwWords)
+
   // If new word has already been used randomly select another - !!freaks out after all options have been played!!
   if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
     resetGame();
     console.log(wordToMatch);
+  }
+
+  // Set number of guesses (higher or lower) based on word length
+  if (wordToMatch.length <= 4) {
+    numGuess = Math.floor(wordToMatch.length * .75)
+  } else if (wordToMatch.length >4 && wordToMatch.length <= 7) {
+    numGuess = Math.floor(wordToMatch.length * .67)
+  } else if (wordToMatch.length >7 && wordToMatch.length <= 10) {
+    numGuess = Math.floor(wordToMatch.length * .5)
+  } else if (wordToMatch.length >10 && wordToMatch.length <= 14) {
+    numGuess = Math.floor(wordToMatch.length * .52)
+  } else if (wordToMatch.length >14) {
+    numGuess = 7;
   }
 
   // Reset word arrays

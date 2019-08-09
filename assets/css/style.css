@@ -59,7 +59,7 @@ h6 {
 }
 
 #currentWord {
-    font-size: 30px !important;
+    font-size: 30px;
     letter-spacing: 4px;
     color: #f9c0b1;
 }
