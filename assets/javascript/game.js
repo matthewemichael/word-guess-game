@@ -40,6 +40,8 @@ var usedGuessingwWords = [];
 var wordToMatch;
 var numGuess;
 var wins = 0;
+var loseSound = new Audio("./assets/sounds/ahahah.mp3");
+var winSound = new Audio("./assets/sounds/clever.wav");
 
 //Starts game
 resetGame()
@@ -48,7 +50,7 @@ resetGame()
 document.onkeydown = function(event) {
   // Make sure key pressed is an alpha character
   if (isLetter(event.key)) {
-  checkForLetter(event.key.toUpperCase())
+  checkForLetter(event.key.toUpperCase());
   }
   document.getElementById('welcome').className = 'noBlink';
 }
@@ -61,7 +63,7 @@ var isLetter = function(ch){
 
 // Check if letter is in word
 function checkForLetter(letter) {
-  var foundLetter = false
+  var foundLetter = false;
 
   // Search string for letter
   for (var i=0; i < wordToMatch.length; i++) {
@@ -72,9 +74,10 @@ function checkForLetter(letter) {
       if (guessingWord.join("") === wordToMatch) {
         // Increment # of wins and add word to usedGuessingWords
         wins++
-        endRound()
-        updateDisplay()
-        setTimeout(resetGame, 300);
+        usedGuessingwWords.push(wordToMatch);
+        winSound.play();
+        updateDisplay();
+        setTimeout(resetGame, 1000);
       }
     }
   }
@@ -88,35 +91,32 @@ function checkForLetter(letter) {
     }
     if (numGuess === 0) {
       // Display word before reseting game
-      endRound()
-      guessingWord = wordToMatch.split()
+      usedGuessingwWords.push(wordToMatch);
+      guessingWord = wordToMatch.split();
+      loseSound.play();
       setTimeout(resetGame, 1000);
     }
   }
-  updateDisplay()
-}
-
-function endRound() {
-  usedGuessingwWords.push(wordToMatch)
+  updateDisplay();
 }
 
 //Reset the game
 function resetGame() {
-  numGuess = maxTries
+  numGuess = maxTries;
   document.getElementById('welcome').className = 'blink';
   // Get a new word
-  wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
+  wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase();
   console.log(wordToMatch)
   console.log(usedGuessingwWords)
   // If new word has already been used randomly select another - !!freaks out after all options have been played!!
   if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
-    resetGame()
-    console.log(wordToMatch)
+    resetGame();
+    console.log(wordToMatch);
   }
 
   // Reset word arrays
-  guessedLetters = []
-  guessingWord = []
+  guessedLetters = [];
+  guessingWord = [];
 
   // Reset the guessed word
   for (var i=0; i < wordToMatch.length; i++){
@@ -125,16 +125,16 @@ function resetGame() {
       guessingWord.push(" ")
     } 
     else {
-      guessingWord.push("_")
+      guessingWord.push("_");
     }
   }
-  updateDisplay()
+  updateDisplay();
 }
 
 // Update the Display
 function updateDisplay () {
-  document.getElementById("totalWins").innerText = wins
-  document.getElementById("currentWord").innerText = guessingWord.join("")
-  document.getElementById("remainingGuesses").innerText = numGuess
-  document.getElementById("guessedLetters").innerText =  guessedLetters.join(" ")
-}
+  document.getElementById("totalWins").innerText = wins;
+  document.getElementById("currentWord").innerText = guessingWord.join("");
+  document.getElementById("remainingGuesses").innerText = numGuess;
+  document.getElementById("guessedLetters").innerText =  guessedLetters.join(" ");
+};

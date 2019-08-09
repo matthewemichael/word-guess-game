@@ -1,15 +1,21 @@
+html {
+    height: 100%;
+    margin: 0 auto;
+}
+
 body {
     background-image: url("../images/nationalparks-vintage-cropped.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center 0;
+    
 }
 
 .container {
 
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 30px;
-    color: #f9e4b2;
+    color: #f7db9a;
     letter-spacing: 0.5px;
     text-shadow:
     -1px -1px 0 #120d01,
@@ -21,36 +27,53 @@ body {
 .jumbotron {
     background: rgba(41, 30, 3, 0.8) !important;
     border: 2px solid #f9e4b2 !important;
+    max-width: 992px !important;
+    margin: 0 auto !important;
 }
 
 h1 {
     font-weight: bold !important;
-    font-size: 60px !important;
+    font-size: 50px !important;
 }
 
 h2 {
     font-weight: bold !important;
-    font-size: 45px !important;
+    font-size: 35px !important;
+    color: #b1f9c0 !important;
 }
 
-h5 { 
+h4 { 
     font-size: 25px !important;
     font-weight: bold !important;
+    color: #b1f9e3 !important;
     animation: blink linear 2s infinite !important;
+}
 
+h5 {
+    font-size: 25px !important;
+}
+
+h6 {
+    font-size: 20px !important;
+    line-height: 150% !important;
+}
+
+#currentWord {
+    font-size: 30px !important;
+    letter-spacing: 4px;
+    color: #f9c0b1;
+}
+
+.varColor {
+    color: #b1c6f9;
 }
 
 .noBlink {
     visibility: hidden;
 }
 
-/* FIND WAY TO STOP BLINKING ON KEY PRESS */
 @keyframes blink{
     0%{opacity: 0;}
     50%{opacity: .5;}
     100%{opacity: 1;}   
-}
-
-#currentWord {
-    letter-spacing: 3px;
 }
