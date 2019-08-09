@@ -116,13 +116,10 @@ function resetGame() {
   document.getElementById('welcome').className = 'blink';
   // Get a new word
   wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase();
-  console.log(wordToMatch)
-  console.log(usedGuessingwWords)
 
   // If new word has already been used randomly select another - !!freaks out after all options have been played!!
   if (usedGuessingwWords.includes(wordToMatch) === true && (usedGuessingwWords !== possibleWords))  {
     resetGame();
-    console.log(wordToMatch);
   }
 
   // Set number of guesses (higher or lower) based on word length
